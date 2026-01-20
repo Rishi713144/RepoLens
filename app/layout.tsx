@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Explain My Code",
+  title: "RepoLens",
   description: "AI-powered codebase analysis and explanation",
   icons: {
     icon: "/favicon.svg",
