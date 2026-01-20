@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 interface ExplanationPanelProps {
   title: string;
@@ -33,9 +34,9 @@ export function ExplanationPanel({ title, content, isLoading, onLevelChange, lev
       </div>
       <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 relative min-h-0 custom-scrollbar">
         {content ? (
-           <div className="prose prose-sm dark:prose-invert max-w-none font-sans pb-10 whitespace-pre-wrap">
+          <ReactMarkdown className="prose prose-sm dark:prose-invert max-w-none font-sans pb-10">
             {content}
-           </div>
+          </ReactMarkdown>
         ) : (
           !isLoading && (
             <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
@@ -45,7 +46,7 @@ export function ExplanationPanel({ title, content, isLoading, onLevelChange, lev
         )}
         
         {isLoading && (
-          <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-background to-transparent flex justify-center">
+          <div className="absolute inset-x-0 bottom-0 p-2 bg-linear-to-t from-background to-transparent flex justify-center">
              <Loader2 className="w-5 h-5 animate-spin text-primary" />
           </div>
         )}
