@@ -11,6 +11,10 @@ import {
   ShieldCheck,
   Github
 } from "lucide-react";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { StackPilotHero } from "@/components/marketing/StackPilotHero";
+import { BackgroundGrid } from "@/components/marketing/BackgroundGrid";
+
 const marketingPhrases = [
   "Understand code 10x faster",
   "Scale your engineering team",
@@ -24,7 +28,7 @@ const marketingPhrases = [
 
 export function MarketingMarquee() {
   return (
-    <div className="relative flex overflow-x-hidden border-y bg-muted/30 py-4">
+    <div className="relative flex overflow-x-hidden border-y border-white/10 bg-black/50 py-4">
       <motion.div
         className="flex whitespace-nowrap"
         animate={{ x: ["0%", "-50%"] }}
@@ -38,15 +42,15 @@ export function MarketingMarquee() {
         {[...marketingPhrases, ...marketingPhrases].map((text, idx) => (
           <span
             key={idx}
-            className="mx-8 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground/70"
+            className="mx-8 text-sm font-medium uppercase tracking-[0.2em] text-[#c8b4a0]/50"
           >
             {text} •
           </span>
         ))}
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent" />
     </div>
   );
 }
@@ -65,17 +69,14 @@ export default function MarketingPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background selection:bg-primary/30">
-      {/* Background Decor */}
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] dark:bg-slate-950 dark:[background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#1e1b4b_100%)]" />
-
+    <div className="flex flex-col min-h-screen bg-black selection:bg-[#c8b4a0]/30">
       {/* --- HEADER --- */}
-      <header className="px-6 md:px-12 h-20 flex items-center justify-between border-b bg-background/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="px-6 md:px-12 h-20 flex items-center justify-between border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50 text-[#f8f7f5]">
         <div className="flex items-center gap-2 font-bold text-2xl tracking-tight">
-          <div className="bg-primary p-1 rounded-lg">
-            <Code className="w-6 h-6 text-primary-foreground" />
+          <div className="bg-[#c8b4a0] p-1 rounded-lg">
+            <Code className="w-6 h-6 text-black" />
           </div>
-          <span>Repo<span className="text-primary">Lens</span></span>
+          <span>Repo<span className="text-[#c8b4a0]">Lens</span></span>
         </div>
         
        
@@ -83,7 +84,7 @@ export default function MarketingPage() {
         <div className="flex items-center">
           <Link 
             href="/dashboard" 
-            className="bg-foreground text-background px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-opacity shadow-lg"
+            className="bg-[#c8b4a0] text-black px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition-opacity shadow-lg"
           >
             Get Started
           </Link>
@@ -92,48 +93,37 @@ export default function MarketingPage() {
 
       {/* --- HERO SECTION --- */}
       <main className="flex-1">
-        <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 px-6 overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-8 animate-bounce">
-              <Zap className="w-4 h-4" /> <span>Now powered by Gemini 1.5 Pro</span>
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
+        <StackPilotHero 
+          taglineTop={
+            <>
+              <Zap className="w-4 h-4 inline-block mr-2" /> 
+              <span>Now powered by Gemini 1.5 Pro</span>
+            </>
+          }
+          title={
+            <>
               Read code like a <br />
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Senior Engineer.
               </span>
-            </h1>
-
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              Stop getting lost in massive repositories. Analyze any GitHub URL and get an interactive roadmap, dependency graphs, and skill-tailored explanations.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
-                href="/dashboard"
-                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-primary px-10 py-4 text-lg font-bold text-primary-foreground shadow-xl shadow-primary/20 hover:scale-105 transition-transform"
-              >
-                Analyze Project <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-              {/* <Link 
-                href="https://github.com"
-                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border bg-background px-10 py-4 text-lg font-bold hover:bg-muted transition-colors"
-              >
-                <Github className="mr-2 w-5 h-5" /> View on GitHub
-              </Link> */}
-            </div>
-          </motion.div>
-        </section>
+            </>
+          }
+          subtitle="Stop getting lost in massive repositories. Analyze any GitHub URL and get an interactive roadmap, dependency graphs, and skill-tailored explanations."
+          cta={
+            <Link 
+              href="/dashboard"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-4 text-lg font-bold text-primary-foreground shadow-xl shadow-primary/20 hover:scale-105 transition-transform"
+            >
+              Analyze Project <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          }
+          taglineBottom="Understand code 10x faster • Scale your engineering team • Navigate complex repositories"
+        />
 
         {/* --- FEATURES GRID --- */}
-        <section className="py-24 px-6 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative py-24 px-6 bg-[#1a1d18]">
+          <BackgroundGrid />
+          <div className="max-w-6xl mx-auto relative z-10">
             <motion.div 
               variants={container}
               initial="hidden"
@@ -161,36 +151,22 @@ export default function MarketingPage() {
         </section>
 
         {/* --- SOCIAL PROOF / STATS --- */}
-        <section className="py-0 border-t overflow-hidden">
-  <div className="flex flex-col items-center gap-8">
-    {/* <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary/60">
-      Built for the modern developer
-    </div> */}
-    
-    <MarketingMarquee />
-    
-   
-    <div className="max-w-4xl mx-auto px-6 flex flex-wrap justify-center gap-12 opacity-30 grayscale contrast-125">
-       {/* <div className="font-black text-xl tracking-tighter">TypeScript</div>
-       <div className="font-black text-xl tracking-tighter">Next.js</div>
-       <div className="font-black text-xl tracking-tighter">React</div>
-       <div className="font-black text-xl tracking-tighter">Gemini</div> */}
-    </div>
-  </div>
-</section>
+        <section className="relative border-t border-white/10 overflow-hidden bg-black">
+          <MarketingMarquee />
+        </section>
       </main>
 
       {/* --- FOOTER --- */}
-      <footer className="py-12 px-6 border-t bg-background">
+      <footer className="py-12 px-6 border-t border-white/10 bg-black text-[#f8f7f5]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 font-bold">
-            <Code className="w-5 h-5 text-primary" />
+            <Code className="w-5 h-5 text-[#c8b4a0]" />
             <span>RepoLens</span>
           </div>
-          <div className="flex gap-8 text-sm text-muted-foreground">
-            <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Terms</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Twitter</Link>
+          <div className="flex gap-8 text-sm text-[#c8b4a0]/70">
+            <Link href="#" className="hover:text-[#f8f7f5] transition-colors">Privacy</Link>
+            <Link href="#" className="hover:text-[#f8f7f5] transition-colors">Terms</Link>
+            <Link href="#" className="hover:text-[#f8f7f5] transition-colors">Twitter</Link>
           </div>
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Explain My Code Inc.
@@ -205,13 +181,23 @@ function FeatureCard({ icon, title, desc }: { icon: React.ReactNode, title: stri
   return (
     <motion.div 
       variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-      className="p-8 rounded-3xl border bg-background hover:shadow-2xl hover:shadow-primary/5 transition-all group"
+      className="relative p-8 rounded-3xl border border-white/10 bg-black hover:shadow-2xl hover:shadow-primary/5 transition-all group overflow-hidden"
     >
-      <div className="mb-4 p-3 rounded-2xl bg-muted w-fit group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-        {icon}
+      <GlowingEffect
+        variant="bronze"
+        spread={40}
+        glow={true}
+        disabled={false}
+        proximity={64}
+        inactiveZone={0.01}
+      />
+      <div className="relative z-10">
+        <div className="mb-4 p-3 rounded-2xl bg-white/5 border border-white/10 w-fit group-hover:bg-[#c8b4a0] group-hover:text-black transition-colors">
+          {icon}
+        </div>
+        <h3 className="text-xl font-bold mb-2 text-[#f8f7f5]">{title}</h3>
+        <p className="text-[#c8b4a0]/70 leading-relaxed">{desc}</p>
       </div>
-      <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed">{desc}</p>
     </motion.div>
   );
 }
